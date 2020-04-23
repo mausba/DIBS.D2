@@ -1,1 +1,1 @@
-# Maus.DIBS.D2
+# DIBS.D2

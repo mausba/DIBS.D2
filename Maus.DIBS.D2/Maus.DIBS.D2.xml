@@ -1,0 +1,893 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Maus.DIBS.D2</name>
+    </assembly>
+    <members>
+        <member name="T:DIBS.D2.DIBSClient">
+            <summary>
+            Provides a base class for sending HTTP requests to DIBS.
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.DIBSClient.HttpClient">
+            <summary>
+            Provides a base class for sending HTTP requests and receiving HTTP responses from a resource identified by a URI.
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.DIBSClient.Options">
+            <summary>
+            DIBS main configuration
+            </summary>
+        </member>
+        <member name="T:DIBS.D2.DIBSOptions">
+            <summary>
+            DIBS main configuration
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.DIBSOptions.Merchant">
+            <summary>
+            Shop identification. The Merchant ID appears in the e-mail received from DIBS during registration with DIBS or on your contract.
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.DIBSOptions.ApiLogin">
+            <summary>
+            ApiLogin
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.DIBSOptions.ApiPassword">
+            <summary>
+            ApiPassword
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.DIBSOptions.OrderIdPrefix">
+            <summary>
+            OrderIdPrefix
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.DIBSOptions.Encoding">
+            <summary>
+            Encoding
+            </summary>
+        </member>
+        <member name="T:DIBS.D2.HostedPaymentResponse">
+            <summary>
+            Response returned by Hosted Payment Window.
+            </summary>
+        </member>
+        <member name="T:DIBS.D2.HostedPaymentWindow">
+            <summary>
+            The responsive D2 Hosted Payment Window - FlexWin - provides the possibility of high customization and a wide variety of functionalities.
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.HostedPaymentWindow.Uri">
+            <summary>
+            Post URL
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.HostedPaymentWindow.AcceptUrl">
+            <summary>
+            The URL of the page to be displayed if the purchase is approved.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.HostedPaymentWindow.Amount">
+            <summary>
+            The smallest unit of an amount in the selected currency.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.HostedPaymentWindow.CallbackUrl">
+            <summary>
+            An optional (but recommended) ”server-to-server” call. Can be used for many purposes. 
+            The most important being that you will be able to register the order in your own system 
+            without depending on the customers browser hitting a specific page of the shop.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.HostedPaymentWindow.CancelUrl">
+            <summary>
+            The URL of the page to be displayed if the purchase is cancelled.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.HostedPaymentWindow.CaptureNow">
+            <summary>
+            If this field exists, a capture request is automatically carried out after the authorization, 
+            following the normal capture process of the specific acquirer.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.HostedPaymentWindow.Currency">
+            <summary>
+            Currency is defined using the ISO4217 standard.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.HostedPaymentWindow.Decorator">
+            <summary>
+            Specifies which of the pre-built decorators to use.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.HostedPaymentWindow.Lang">
+            <summary>
+            This parameter determines the language in which the page will be displayed.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.HostedPaymentWindow.OrderId">
+            <summary>
+            The shops order number for a particular purchase. This is the cross reference between 
+            the shop and Nets (both numerals and letters may be used). The actual length of the OrderId 
+            shown on the bank settlement report may differ from acquirer to acquirer.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.HostedPaymentWindow.Preauth">
+            <summary>
+            Identifies the authorisation as a ticket authorisation rather than a normal transaction. 
+            Please note that the pre-authorised transaction is NOT available among the transactions in the Nets Administration interface.
+            NOTE: You cannot use "capturenow" along with "preauth".
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.HostedPaymentWindow.Test">
+            <summary>
+            When this field is declared, the transaction is not dispatched to the card issuer, 
+            but is instead handled by the Nets test environment.
+            </summary>
+        </member>
+        <member name="M:DIBS.D2.HostedPaymentWindow.#ctor(System.String,System.Int32,DIBS.D2.Currency,System.String)">
+            <summary>
+            Creates a new Hosted Payment Window.
+            </summary>
+            <param name="AcceptUrl">The URL of the page to be displayed if the purchase is approved.</param>
+            <param name="Amount">The smallest unit of an amount in the selected currency.</param>
+            <param name="Currency">Currency is defined using the ISO4217 standard.</param>
+            <param name="OrderId">The shops order number for a particular purchase.</param>
+        </member>
+        <member name="M:DIBS.D2.HostedPaymentWindow.ToQueryString">
+            <summary>
+            Return object as a query string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DIBS.D2.Cancel">
+            <summary>
+            Used to cancel a transaction.
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.Cancel.Uri">
+            <summary>
+            Post URL
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Cancel.OrderId">
+            <summary>
+            The shop’s order number for this particular purchase. It can be seen later when a payment is captured,
+            and will in some instances appear on the customer’s bank statement (both numerals and letters may be used).
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Cancel.TextReply">
+            <summary>
+            Should be declared to receive the returned message in simple text format.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Cancel.Transact">
+            <summary>
+            The unique Nets identification number for the transaction.
+            </summary>
+        </member>
+        <member name="M:DIBS.D2.Cancel.#ctor(System.String,System.Int64)">
+            <summary>
+            Creates a new Cancel.
+            </summary>
+            <param name="OrderId">The shops order number for a particular purchase.</param>
+            <param name="Transact">The unique Nets identification number for the transaction.</param>
+        </member>
+        <member name="M:DIBS.D2.Cancel.ToQueryString">
+            <summary>
+            Return object as a query string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DIBS.D2.Cancel.Post">
+            <summary>
+            Post request
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DIBS.D2.Capture">
+            <summary>
+            Used to capture a transaction.
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.Capture.Uri">
+            <summary>
+            Post URL
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Capture.Amount">
+            <summary>
+            The smallest unit of an amount in the selected currency.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Capture.Force">
+            <summary>
+            If force=true is posted, the Nets server will attempt to capture otherwise expired authorisations (more than 7 days old). 
+            This is achieved through an initial re-authorisation of the original transaction, followed by a capture process.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Capture.OrderId">
+            <summary>
+            The shop’s order number for this particular purchase. It can be seen later when a payment is captured,
+            and will in some instances appear on the customer’s bank statement (both numerals and letters may be used).
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Capture.TextReply">
+            <summary>
+            Should be declared to receive the returned message in simple text format.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Capture.Transact">
+            <summary>
+            The unique Nets identification number for the transaction.
+            </summary>
+        </member>
+        <member name="M:DIBS.D2.Capture.#ctor(System.Int64,System.String,System.Int64)">
+            <summary>
+            Creates a new Capture.
+            </summary>
+            <param name="Amount">The smallest unit of an amount in the selected currency.</param>
+            <param name="OrderId">The shops order number for a particular purchase.</param>
+            <param name="Transact">The unique Nets identification number for the transaction.</param>
+        </member>
+        <member name="M:DIBS.D2.Capture.ToQueryString">
+            <summary>
+            Return object as a query string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DIBS.D2.Capture.Post">
+            <summary>
+            Post request
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DIBS.D2.Reauth">
+            <summary>
+            Used to re-authorize a transaction, if the authorization has expired.
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.Reauth.Uri">
+            <summary>
+            Post URL
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Reauth.Account">
+            <summary>
+            If multiple departments utilize the same Nets account, it may be practical to keep the transactions separate at Nets. 
+            An account name may be inserted in this field, to separate transactions at Nets.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Reauth.FullReply">
+            <summary>
+            If this variable is set, all variables will be returned (as defined in the Nets administration).
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Reauth.TextReply">
+            <summary>
+            Should be declared to receive the returned message in simple text format.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Reauth.Transact">
+            <summary>
+            The unique Nets identification number for the transaction.
+            </summary>
+        </member>
+        <member name="M:DIBS.D2.Reauth.#ctor(System.Int64)">
+            <summary>
+            Creates a new Reauth.
+            </summary>
+            <param name="Transact">The unique Nets identification number for the transaction.</param>
+        </member>
+        <member name="M:DIBS.D2.Reauth.ToQueryString">
+            <summary>
+            Return object as a query string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DIBS.D2.Reauth.Post">
+            <summary>
+            Post request
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DIBS.D2.Refund">
+            <summary>
+            Used to partly or full refund a captured transaction.
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.Refund.Uri">
+            <summary>
+            Post URL
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Refund.Amount">
+            <summary>
+            The smallest unit of an amount in the selected currency.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Refund.Currency">
+            <summary>
+            Currency is defined using the ISO4217 standard.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Refund.OrderId">
+            <summary>
+            The shop’s order number for this particular purchase. It can be seen later when a payment is captured,
+            and will in some instances appear on the customer’s bank statement (both numerals and letters may be used).
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Refund.TextReply">
+            <summary>
+            Should be declared to receive the returned message in simple text format.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Refund.Transact">
+            <summary>
+            The unique Nets identification number for the transaction.
+            </summary>
+        </member>
+        <member name="M:DIBS.D2.Refund.#ctor(System.Int64,DIBS.D2.Currency,System.String,System.Int64)">
+            <summary>
+            Creates a new Refund.
+            </summary>
+            <param name="Amount">The smallest unit of an amount in the selected currency.</param>
+            <param name="Currency">Currency is defined using the ISO4217 standard.</param>
+            <param name="OrderId">The shops order number for a particular purchase.</param>
+            <param name="Transact">The unique Nets identification number for the transaction.</param>
+        </member>
+        <member name="M:DIBS.D2.Refund.ToQueryString">
+            <summary>
+            Return object as a query string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DIBS.D2.Refund.Post">
+            <summary>
+            Post request
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DIBS.D2.TicketAuth">
+            <summary>
+            Used to authorize a transaction on a ticket.
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.TicketAuth.Uri">
+            <summary>
+            Post URL
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.TicketAuth.Amount">
+            <summary>
+            The smallest unit of an amount in the selected currency.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.TicketAuth.CaptureNow">
+            <summary>
+            If this field exists, a capture request is automatically carried out after the authorization, 
+            following the normal capture process of the specific acquirer.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.TicketAuth.Currency">
+            <summary>
+            Currency is defined using the ISO4217 standard.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.TicketAuth.OrderId">
+            <summary>
+            The shop’s order number for this particular purchase. It can be seen later when a payment is captured,
+            and will in some instances appear on the customer’s bank statement (both numerals and letters may be used).
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.TicketAuth.Test">
+            <summary>
+            When this field is declared, the transaction is not dispatched to the card issuer, 
+            but is instead handled by the Nets test environment.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.TicketAuth.TextReply">
+            <summary>
+            Should be declared to receive the returned message in simple text format.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.TicketAuth.Ticket">
+            <summary>
+            The unique Ticket ID. Has the same format as a transaction number.
+            </summary>
+        </member>
+        <member name="M:DIBS.D2.TicketAuth.#ctor(System.Int64,DIBS.D2.Currency,System.String,System.Int64)">
+            <summary>
+            Creates a new Ticket Auth.
+            </summary>
+            <param name="Amount">The smallest unit of an amount in the selected currency.</param>
+            <param name="Currency">Currency is defined using the ISO4217 standard.</param>
+            <param name="OrderId">The shops order number for a particular purchase.</param>
+            <param name="Ticket">The unique Ticket ID. Has the same format as a transaction number.</param>
+        </member>
+        <member name="M:DIBS.D2.TicketAuth.ToQueryString">
+            <summary>
+            Return object as a query string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DIBS.D2.TicketAuth.Post">
+            <summary>
+            Post request
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DIBS.D2.CancelResponse">
+            <summary>
+            Response returned by Cancel.
+            </summary>
+        </member>
+        <member name="T:DIBS.D2.CaptureResponse">
+            <summary>
+            Response returned by Capture.
+            </summary>
+        </member>
+        <member name="T:DIBS.D2.ReauthResponse">
+            <summary>
+            Response returned by Reauth.
+            </summary>
+        </member>
+        <member name="T:DIBS.D2.RefundResponse">
+            <summary>
+            Response returned by Refund.
+            </summary>
+        </member>
+        <member name="T:DIBS.D2.TicketAuthResponse">
+            <summary>
+            Response returned by Ticket Auth.
+            </summary>
+        </member>
+        <member name="T:DIBS.D2.Callback">
+            <summary>
+            Used to get the original callback.
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.Callback.Uri">
+            <summary>
+            Post URL
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Callback.Transact">
+            <summary>
+            The unique Nets identification number for the transaction.
+            The transact is a as minimum 6-digit integer, e.g. transact=123456.
+            </summary>
+        </member>
+        <member name="M:DIBS.D2.Callback.#ctor(System.Int64)">
+            <summary>
+            Allows customers to pull for callback information.
+            </summary>
+            <param name="Transact">The unique Nets identification number for the transaction.</param>
+        </member>
+        <member name="M:DIBS.D2.Callback.ToQueryString">
+            <summary>
+            Return object as a query string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DIBS.D2.Callback.Post">
+            <summary>
+            Post request
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DIBS.D2.CardType">
+            <summary>
+            Used to get the cardtype used in a transaction.
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.CardType.Uri">
+            <summary>
+            Post URL
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.CardType.Account">
+            <summary>
+            If multiple departments utilize the same DIBS account, it may be practical to keep the transactions separate at DIBS. 
+            An account name may be inserted in this field, to separate transactions at DIBS.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.CardType.Transact">
+            <summary>
+            The unique Nets identification number for the transaction.
+            The transact is a as minimum 6-digit integer, e.g. transact=123456.
+            </summary>
+        </member>
+        <member name="M:DIBS.D2.CardType.#ctor(System.Int64)">
+            <summary>
+            CardType  is used for getting the credit card type used for a specific transaction.
+            </summary>
+            <param name="Transact">The unique Nets identification number for the transaction.</param>
+        </member>
+        <member name="M:DIBS.D2.CardType.ToQueryString">
+            <summary>
+            Return object as a query string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DIBS.D2.CardType.Post">
+            <summary>
+            Post request
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DIBS.D2.ChangeStatus">
+            <summary>
+            Used to change the status of a transaction.
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.ChangeStatus.Uri">
+            <summary>
+            Post URL
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.ChangeStatus.Account">
+            <summary>
+            If multiple departments utilize the same DIBS account, it may be practical to keep the transactions separate at DIBS. 
+            An account name may be inserted in this field, to separate transactions at DIBS.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.ChangeStatus.Action">
+            <summary>
+            Action must take on either: “new”, “matched”, “canceled”, or “captured” depending on the 
+            status you want the transaction to have afterwards.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.ChangeStatus.Amount">
+            <summary>
+            The smallest unit of an amount in the selected currency, following ISO4217.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.ChangeStatus.Force">
+            <summary>
+            Use this to change status from either Pending or Declined to New, Cancelled or Captured.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.ChangeStatus.FullReply">
+            <summary>
+            If this variable is set, all variables will be returned (as defined in the Nets administration).
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.ChangeStatus.TextReply">
+            <summary>
+            Should be declared to receive the returned message in simple text format.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.ChangeStatus.Transact">
+            <summary>
+            The unique Nets identification number for the transaction.
+            The transact is a as minimum 6-digit integer, e.g. transact=123456.
+            </summary>
+        </member>
+        <member name="M:DIBS.D2.ChangeStatus.#ctor(System.String,System.Int32,System.Boolean,System.Int64)">
+            <summary>
+            The purpose of ChangeStatus is to allow changing the status of a specific transaction on the DIBS server, 
+            without using the DIBS administration interface.
+            </summary>
+        </member>
+        <member name="M:DIBS.D2.ChangeStatus.ToQueryString">
+            <summary>
+            Return object as a query string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DIBS.D2.ChangeStatus.Post">
+            <summary>
+            Post request
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DIBS.D2.ConfirmTransact">
+            <summary>
+            Used to confirm that the transaction is registrered at Nets.
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.ConfirmTransact.Uri">
+            <summary>
+            Post URL
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.ConfirmTransact.Account">
+            <summary>
+            If multiple departments utilize the same DIBS account, it may be practical to keep the transactions separate at DIBS. 
+            An account name may be inserted in this field, to separate transactions at DIBS.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.ConfirmTransact.Currency">
+            <summary>
+            Currency is defined using the ISO4217 standard.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.ConfirmTransact.OrderId">
+            <summary>
+            The shop’s order number for this particular purchase. It can be seen later when a payment is captured,
+            and will in some instances appear on the customer’s bank statement (both numerals and letters may be used).
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.ConfirmTransact.Transact">
+            <summary>
+            The unique Nets identification number for the transaction.
+            The transact is a as minimum 6-digit integer, e.g. transact=123456.
+            </summary>
+        </member>
+        <member name="M:DIBS.D2.ConfirmTransact.#ctor(DIBS.D2.Currency,System.String,System.Int64)">
+            <summary>
+            ConfirmTransact is used for confirming that a particular transaction was successfully registered on the DIBS server.
+            </summary>
+            <param name="Currency"></param>
+            <param name="OrderId"></param>
+            <param name="Transact"></param>
+        </member>
+        <member name="M:DIBS.D2.ConfirmTransact.ToQueryString">
+            <summary>
+            Return object as a query string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DIBS.D2.ConfirmTransact.Post">
+            <summary>
+            Post request
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DIBS.D2.PayInfo">
+            <summary>
+            Used to get the basic transaction information.
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.PayInfo.Uri">
+            <summary>
+            Post URL
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.PayInfo.Transact">
+            <summary>
+            The unique Nets identification number for the transaction.
+            </summary>
+        </member>
+        <member name="M:DIBS.D2.PayInfo.#ctor(System.Int64)">
+            <summary>
+            Creates a new PayInfo.
+            </summary>
+            <param name="Transact">The unique Nets identification number for the transaction.</param>
+        </member>
+        <member name="M:DIBS.D2.PayInfo.ToQueryString">
+            <summary>
+            Return object as a query string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DIBS.D2.PayInfo.Post">
+            <summary>
+            Post request
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DIBS.D2.Status">
+            <summary>
+            Used to get the status of the connection to various acquirers.
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.Status.Uri">
+            <summary>
+            Post URL
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Status.Acquirer">
+            <summary>
+            The name of the acquirer for which you want to know the current status.
+            It´s also possible to state "all". In this case Status will return the status of all connected acquirers.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.Status.TextReply">
+            <summary>
+            Should be declared to receive the returned message in simple text format.
+            </summary>
+        </member>
+        <member name="M:DIBS.D2.Status.ToQueryString">
+            <summary>
+            Return object as a query string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DIBS.D2.Status.Post">
+            <summary>
+            Post request
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DIBS.D2.TransInfo">
+            <summary>
+            Used to receive simple transaction information and status in Nets.
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.TransInfo.Uri">
+            <summary>
+            Post URL
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.TransInfo.Account">
+            <summary>
+            If multiple departments utilize the same DIBS account, it may be practical to keep the transactions separate at DIBS. 
+            An account name may be inserted in this field, to separate transactions at DIBS.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.TransInfo.Amount">
+            <summary>
+            The smallest unit of an amount in the selected currency, following ISO4217.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.TransInfo.Currency">
+            <summary>
+            Currency is defined using the ISO4217 standard.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.TransInfo.OrderId">
+            <summary>
+            The shop’s order number for this particular purchase. It can be seen later when a payment is captured,
+            and will in some instances appear on the customer’s bank statement (both numerals and letters may be used).
+            </summary>
+        </member>
+        <member name="M:DIBS.D2.TransInfo.ToQueryString">
+            <summary>
+            Return object as query string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DIBS.D2.TransInfo.Post">
+            <summary>
+            Post request
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DIBS.D2.TransStatus">
+            <summary>
+            Used to get the exact status in Nets' system.
+            </summary>
+        </member>
+        <member name="F:DIBS.D2.TransStatus.Uri">
+            <summary>
+            Post URL
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.TransStatus.Account">
+            <summary>
+            If multiple departments utilize the same DIBS account, it may be practical to keep the transactions separate at DIBS. 
+            An account name may be inserted in this field, to separate transactions at DIBS.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.TransStatus.Transact">
+            <summary>
+            The unique Nets identification number for the transaction.
+            </summary>
+        </member>
+        <member name="M:DIBS.D2.TransStatus.#ctor(System.Int64)">
+            <summary>
+            Creates a new Trans Status.
+            </summary>
+            <param name="Transact">The unique Nets identification number for the transaction.</param>
+        </member>
+        <member name="M:DIBS.D2.TransStatus.ToQueryString">
+            <summary>
+            Return object as a query string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DIBS.D2.TransStatus.Post">
+            <summary>
+            Post request
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DIBS.D2.CallbackResponse">
+            <summary>
+            Response returned by Callback.
+            </summary>
+        </member>
+        <member name="T:DIBS.D2.CardTypeResponse">
+            <summary>
+            Response returned by Card Type.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:DIBS.D2.ChangeStatusResponse" -->
+        <member name="T:DIBS.D2.ConfirmTransactResponse">
+            <summary>
+            Response returned by Confirm Transact.
+            </summary>
+        </member>
+        <member name="T:DIBS.D2.PayInfoResponse">
+            <summary>
+            Response returned by Pay Info.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.PayInfoResponse.ActionCode">
+            <summary>
+            This is the action code returned by the acquirer.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.PayInfoResponse.Amount">
+            <summary>
+            The smallest unit of an amount in the selected currency.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.PayInfoResponse.ApprovalCode">
+            <summary>
+            Returnes the approvalcode from the acquire if available.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.PayInfoResponse.Batch">
+            <summary>
+            When the transaction is captured by a batch job, this parameter contains the ID of the batch job.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.PayInfoResponse.Currency">
+            <summary>
+            Currency is defined using the ISO4217 standard.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.PayInfoResponse.Fee">
+            <summary>
+            When calcfee is used, the calculated fee is returned so it can be shown on the receipt.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.PayInfoResponse.OrderId">
+            <summary>
+            The shop’s order number for this particular purchase. It can be seen later when a payment is captured,
+            and will in some instances appear on the customer’s bank statement (both numerals and letters may be used).
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.PayInfoResponse.Response">
+            <summary>
+            Full response returned by post request.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.PayInfoResponse.Status">
+            <summary>
+            Status of the payment in the DIBS backend.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.PayInfoResponse.Transact">
+            <summary>
+            The unique DIBS identification number for the transaction.
+            </summary>
+        </member>
+        <member name="M:DIBS.D2.PayInfoResponse.#ctor(System.String)">
+            <summary>
+            Creates a new Pay Info Response.
+            </summary>
+            <param name="response"></param>
+        </member>
+        <member name="T:DIBS.D2.StatusResponse">
+            <summary>
+            Response returned by Status.
+            </summary>
+        </member>
+        <member name="T:DIBS.D2.TransInfoResponse">
+            <summary>
+            Response returned by Trans Info.
+            </summary>
+        </member>
+        <member name="T:DIBS.D2.TransStatusResponse">
+            <summary>
+            Response returned by Trans Status.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.TransStatusResponse.Response">
+            <summary>
+            Full response returned by post request.
+            </summary>
+        </member>
+        <member name="P:DIBS.D2.TransStatusResponse.Status">
+            <summary>
+            Status of the payment in the DIBS backend.
+            </summary>
+        </member>
+    </members>
+</doc>

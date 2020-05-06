@@ -15,6 +15,8 @@ namespace DIBS.D2
         /// </summary>
         public static Uri Uri = new Uri("https://payment.architrade.com/cardtype.pml");
 
+        private static DateTime LastCall = DateTime.MinValue;
+
         /// <summary>
         /// If multiple departments utilize the same DIBS account, it may be practical to keep the transactions separate at DIBS. 
         /// An account name may be inserted in this field, to separate transactions at DIBS.
@@ -71,6 +73,9 @@ namespace DIBS.D2
         /// <returns></returns>
         public async Task<CardTypeResponse> Post()
         {
+            if ((DateTime.Now - LastCall).TotalMilliseconds <= 500)
+                await Task.Delay(500);
+
             var content = new StringContent(ToQueryString(), DIBSClient.Options.Encoding, "application/x-www-form-urlencoded");
             var response = await DIBSClient.HttpClient.PostAsync(Uri, content);
             var paymentResponse = new CardTypeResponse(response.Content.ReadAsStringAsync().Result);

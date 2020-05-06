@@ -15,6 +15,8 @@ namespace DIBS.D2
         /// </summary>
         public static Uri Uri = new Uri("https://payment.architrade.com/cgi-bin/transinfo.cgi");
 
+        private static DateTime LastCall = DateTime.MinValue;
+
         /// <summary>
         /// If multiple departments utilize the same DIBS account, it may be practical to keep the transactions separate at DIBS. 
         /// An account name may be inserted in this field, to separate transactions at DIBS.
@@ -39,6 +41,12 @@ namespace DIBS.D2
 
 
 
+        /// <summary>
+        /// Creates a new TransInfo.
+        /// </summary>
+        /// <param name="Amount">The smallest unit of an amount in the selected currency.</param>
+        /// <param name="Currency">Currency is defined using the ISO4217 standard.</param>
+        /// <param name="OrderId">The shops order number for a particular purchase.</param>
         public TransInfo(int Amount, Currency Currency, string OrderId)
         {
             this.Amount = Amount;
@@ -81,6 +89,9 @@ namespace DIBS.D2
         /// <returns></returns>
         public async Task<TransInfoResponse> Post()
         {
+            if ((DateTime.Now - LastCall).TotalMilliseconds <= 500)
+                await Task.Delay(500);
+
             var content = new StringContent(ToQueryString(), DIBSClient.Options.Encoding, "application/x-www-form-urlencoded");
             var response = await DIBSClient.HttpClient.PostAsync(Uri, content);
             var paymentResponse = new TransInfoResponse(response.Content.ReadAsStringAsync().Result);

@@ -15,6 +15,8 @@ namespace DIBS.D2
         /// </summary>
         public static Uri Uri = new Uri("https://payment.architrade.com/cgi-bin/reauth.cgi");
 
+        private static DateTime LastCall = DateTime.MinValue;
+
         /// <summary>
         /// If multiple departments utilize the same Nets account, it may be practical to keep the transactions separate at Nets. 
         /// An account name may be inserted in this field, to separate transactions at Nets.
@@ -86,6 +88,9 @@ namespace DIBS.D2
         /// <returns></returns>
         public async Task<ReauthResponse> Post()
         {
+            if ((DateTime.Now - LastCall).TotalMilliseconds <= 200)
+                await Task.Delay(200);
+
             var content = new StringContent(ToQueryString(), DIBSClient.Options.Encoding, "application/x-www-form-urlencoded");
             var response = await DIBSClient.HttpClient.PostAsync(Uri, content);
             var paymentResponse = new ReauthResponse(response.Content.ReadAsStringAsync().Result);

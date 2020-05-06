@@ -15,6 +15,8 @@ namespace DIBS.D2
         /// </summary>
         public static Uri Uri = new Uri("https://payment.architrade.com/cgi-ssl/ticket_auth.cgi");
 
+        private static DateTime LastCall = DateTime.MinValue;
+
         /// <summary>
         /// The smallest unit of an amount in the selected currency.
         /// </summary>
@@ -112,6 +114,9 @@ namespace DIBS.D2
         /// <returns></returns>
         public async Task<TicketAuthResponse> Post()
         {
+            if ((DateTime.Now - LastCall).TotalMilliseconds <= 200)
+                await Task.Delay(200);
+
             var content = new StringContent(ToQueryString(), DIBSClient.Options.Encoding, "application/x-www-form-urlencoded");
             var response = await DIBSClient.HttpClient.PostAsync(Uri, content);
             var paymentResponse = new TicketAuthResponse(response.Content.ReadAsStringAsync().Result);

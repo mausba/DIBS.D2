@@ -16,6 +16,8 @@ namespace DIBS.D2
         /// </summary>
         public static Uri Uri = new Uri("https://payment.architrade.com/cgi-adm/payinfo.cgi");
 
+        private static DateTime LastCall = DateTime.MinValue;
+
         /// <summary>
         /// The unique Nets identification number for the transaction.
         /// </summary>
@@ -59,6 +61,9 @@ namespace DIBS.D2
         /// <returns></returns>
         public async Task<PayInfoResponse> Post()
         {
+            if ((DateTime.Now - LastCall).TotalMilliseconds <= 200)
+                await Task.Delay(200);
+
             var content = new StringContent(ToQueryString(), DIBSClient.Options.Encoding, "application/x-www-form-urlencoded");
 
             var login = DIBSClient.Options.Encoding.GetBytes(DIBSClient.Options.ApiLogin + ":" + DIBSClient.Options.ApiPassword);

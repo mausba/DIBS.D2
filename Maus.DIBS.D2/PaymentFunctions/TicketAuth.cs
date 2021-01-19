@@ -118,7 +118,7 @@ namespace DIBS.D2
                 await Task.Delay(200);
 
             var content = new StringContent(ToQueryString(), DIBSClient.Options.Encoding, "application/x-www-form-urlencoded");
-            var response = await DIBSClient.HttpClient.PostAsync(Uri, content);
+            var response = await DIBSClient.HttpClient.PostAsync(Uri, content).ConfigureAwait(false);
             var paymentResponse = new TicketAuthResponse(response.Content.ReadAsStringAsync().Result);
 
             return paymentResponse;

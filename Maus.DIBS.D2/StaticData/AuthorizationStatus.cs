@@ -1,5 +1,8 @@
-﻿namespace DIBS.D2
+﻿using System;
+
+namespace DIBS.D2
 {
+    [Serializable]
     public class AuthorizationStatus
     {
         public int Code { get; set; }
@@ -126,11 +129,15 @@
 
         public static bool operator ==(AuthorizationStatus obj1, AuthorizationStatus obj2)
         {
+            if (obj1 is null && obj2 is null) return true;
+            if (obj1 is null || obj2 is null) return false;
             return (obj1.Code == obj2.Code);
         }
 
         public static bool operator !=(AuthorizationStatus obj1, AuthorizationStatus obj2)
         {
+            if (obj1 is null && obj2 is null) return false;
+            if (obj1 is null || obj2 is null) return true;
             return (obj1.Code != obj2.Code);
         }
     }

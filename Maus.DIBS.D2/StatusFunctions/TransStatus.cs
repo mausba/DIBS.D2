@@ -76,7 +76,7 @@ namespace DIBS.D2
                 await Task.Delay(500);
 
             var content = new StringContent(ToQueryString(), DIBSClient.Options.Encoding, "application/x-www-form-urlencoded");
-            var response = await DIBSClient.HttpClient.PostAsync(Uri, content);
+            var response = await DIBSClient.HttpClient.PostAsync(Uri, content).ConfigureAwait(false);
             var paymentResponse = new TransactionStatus(int.Parse(response.Content.ReadAsStringAsync().Result));
 
             return paymentResponse;

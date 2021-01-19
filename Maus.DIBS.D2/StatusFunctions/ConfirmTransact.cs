@@ -89,7 +89,7 @@ namespace DIBS.D2
         public async Task<ConfirmTransactResponse> Post()
         {
             var content = new StringContent(ToQueryString(), DIBSClient.Options.Encoding, "application/x-www-form-urlencoded");
-            var response = await DIBSClient.HttpClient.PostAsync(Uri, content);
+            var response = await DIBSClient.HttpClient.PostAsync(Uri, content).ConfigureAwait(false);
             var paymentResponse = new ConfirmTransactResponse(response.Content.ReadAsStringAsync().Result);
 
             return paymentResponse;

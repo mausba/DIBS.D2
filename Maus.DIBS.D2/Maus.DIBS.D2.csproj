@@ -1,21 +1,27 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Company>MAUS</Company>
+    <PackageId>MAUS.DIBS.D2</PackageId>
+    <Copyright>Copyright © MAUS</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <Optimize>false</Optimize>
-    <DocumentationFile>D:\Visual Studio Projects\Maus.DIBS.D2\Maus.DIBS.D2\Maus.DIBS.D2.xml</DocumentationFile>
+    <DocumentationFile>D:\Visual Studio Projects\MAUS.DIBS.D2\MAUS.DIBS.D2\MAUS.DIBS.D2.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\Visual Studio Projects\Maus.DIBS.D2\Maus.DIBS.D2\Maus.DIBS.D2.xml</DocumentationFile>
+    <DocumentationFile>D:\Visual Studio Projects\MAUS.DIBS.D2\MAUS.DIBS.D2\MAUS.DIBS.D2.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
 </Project>

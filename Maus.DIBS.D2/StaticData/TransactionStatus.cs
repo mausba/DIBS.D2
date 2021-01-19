@@ -1,5 +1,8 @@
-﻿namespace DIBS.D2
+﻿using System;
+
+namespace DIBS.D2
 {
+    [Serializable]
     public class TransactionStatus
     {
         public int Code { get; set; }

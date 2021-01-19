@@ -69,7 +69,7 @@ namespace DIBS.D2
             var login = DIBSClient.Options.Encoding.GetBytes(DIBSClient.Options.ApiLogin + ":" + DIBSClient.Options.ApiPassword);
             DIBSClient.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(login));
 
-            var response = await DIBSClient.HttpClient.PostAsync(Uri, content);
+            var response = await DIBSClient.HttpClient.PostAsync(Uri, content).ConfigureAwait(false);
             var paymentResponse = new PayInfoResponse(response.Content.ReadAsStringAsync().Result);
 
             DIBSClient.HttpClient.DefaultRequestHeaders.Authorization = null;

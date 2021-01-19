@@ -1,5 +1,8 @@
-﻿namespace DIBS.D2
+﻿using System;
+
+namespace DIBS.D2
 {
+    [Serializable]
     public class Language
     {
         public string Value { get; set; }

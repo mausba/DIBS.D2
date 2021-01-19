@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Maus.DIBS.D2</name>
+        <name>MAUS.DIBS.D2</name>
     </assembly>
     <members>
         <member name="T:DIBS.D2.DIBSClient">
